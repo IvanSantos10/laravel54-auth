@@ -18,3 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin'], function() {
+    //
+    $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    $this->post('login', 'Auth\LoginController@login');
+    $this->post('logout', 'Auth\LoginController@logout')->name('logout');
+
+    $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->nome('password.request');
+    $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->nome('password.email');
+    $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetFrom')->nome('password.reset');
+    $this->post('password/reset', 'Auth\ResetPasswordController@reset');
+})

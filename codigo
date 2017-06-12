@@ -4,3 +4,5 @@ composer require caouecs/laravel-lang
 https://mailtrap.io/
 
 php artisan make:notification MyResetPasswordNotification
+
+composer require --dev barryvdh/laravel-ide-helper
