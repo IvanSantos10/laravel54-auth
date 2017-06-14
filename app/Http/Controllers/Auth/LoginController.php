@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        \Auth::user()->role == User::ROLE_ADMIN ? '/admin/home' : '/home';
+        return \Auth::user()->role == User::ROLE_ADMIN ? '/admin/home' : '/home';
     }
 
 
