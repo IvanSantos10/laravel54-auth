@@ -6,3 +6,8 @@ https://mailtrap.io/
 php artisan make:notification MyResetPasswordNotification
 
 composer require --dev barryvdh/laravel-ide-helper
+
+php artisan make:migration add_role_to_users --table=users
+
+composer require doctrine/dbal
+
