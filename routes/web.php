@@ -43,3 +43,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('/login/social', 'Auth\LoginController@loginSocial');
     Route::get('/login/callback', 'Auth\LoginController@loginCallback');
 });
+
+Route::get('/auth', function (\Illuminate\Http\Request $request) {
+    //dd($request->user());
+    //dd(\Auth::user());
+    //dd(\Auth::check());
+    //dd(\Auth::id());
+    dd(\Auth::loginUsingId(1));
+});
