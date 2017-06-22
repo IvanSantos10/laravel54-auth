@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 
 Auth::routes();
+Route::post('/login/social', 'Auth\LoginController@loginSocial');
+Route::get('/login/callback', 'Auth\LoginController@loginCallback');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -36,4 +39,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(['middleware' => 'can:admin'], function() {
         Route::get('/home', 'HomeController@index')->name('home');
     });
+
+    Route::post('/login/social', 'Auth\LoginController@loginSocial');
+    Route::get('/login/callback', 'Auth\LoginController@loginCallback');
 });

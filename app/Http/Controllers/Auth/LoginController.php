@@ -39,6 +39,37 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function loginSocial(Request $request)
+    {
+        $this->validate($request, [
+            'social_type' => 'required|in:google,github'
+        ]);
+        $socialType = $request->get('social_type');
+
+        \Session::put('social_type',$socialType);
+        return \Socialite::driver($socialType)->redirect();
+    }
+
+    public function loginCallback()
+    {
+        $socialType = \Session::pull('social_type');
+        $userSocial = \Socialite::driver($socialType)->user();
+
+        $user = User::where('email', $userSocial->email)->first();
+        if (!$user) {
+            $user = User::create([
+                'name' => $userSocial->name,
+                'email' => $userSocial->email,
+                'password' => bcrypt('123456'),
+                'role' => User::ROLE_USER,
+                'phone' => '0000',
+                'cpf' => '0000'
+            ]);
+        }
+        \Auth::login($user);
+        return redirect()->intended($this->redirectPath());
+    }
+
     public function redirectTo()
     {
         return \Auth::user()->role == User::ROLE_ADMIN ? '/admin/home' : '/home';
@@ -60,7 +91,8 @@ class LoginController extends Controller
     {
         $data = $request->only($this->username(), 'password');
         $usernameKey = $this->usernameKey();
-        if($usernameKey != $this->username()){  dd($this->username(), $data[$this->username()]);
+        if ($usernameKey != $this->username()) {
+            dd($this->username(), $data[$this->username()]);
             $data[$usernameKey] = $data[$this->username()];
             unset($data[$this->username()]);
         }

@@ -15,3 +15,5 @@ composer require codeedu/code_validator:0.0.2    validador cpf
 
 composer require laravel/socialite
 
+https://console.developers.google.com  (google plus)
+
