@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Auth::routes();
 Route::post('/login/social', 'Auth\LoginController@loginSocial');
 Route::get('/login/callback', 'Auth\LoginController@loginCallback');
@@ -51,3 +50,5 @@ Route::get('/auth', function (\Illuminate\Http\Request $request) {
     //dd(\Auth::id());
     dd(\Auth::loginUsingId(1));
 });
+
+Route::resource('clients', 'ClientsController', ['except' => 'show']);
