@@ -11,4 +11,7 @@ class Client extends Model
         2 => 'Casado',
         3 => 'Divorciado'
     ];
+
+    const PESSOA_FISICA = 'fisica';
+    const PESSOA_JURIDICA = 'juridica';
 }
