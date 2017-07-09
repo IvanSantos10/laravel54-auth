@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->environment() !== 'production') {
-            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        if ($this->app->environment('local')) { // consider turning this into a method like isDevEnvironment() if you need more logic
+            array_map([$this->app, 'register'], config('app.devProviders'));
         }
     }
 }
