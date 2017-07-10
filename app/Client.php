@@ -14,4 +14,17 @@ class Client extends Model
 
     const PESSOA_FISICA = 'fisica';
     const PESSOA_JURIDICA = 'juridica';
+
+    protected $fillableGeneral = [
+        'nome',
+        'documento',
+        'email',
+        'telefone',
+        'inadimplente',
+    ];
+
+    public static function getPessoa($value)
+    {
+        return $value == Client::PESSOA_JURIDICA ? $value : Client::PESSOA_FISICA;
+    }
 }
