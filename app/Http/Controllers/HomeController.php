@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        require_once __DIR__ . './../../../database/factories/documento.php';
+
+        $cpfs = cpfs();
+        $cnpjs = cnpjs();
+        dd($cpfs[array_rand($cpfs,1)], $cnpjs[array_rand($cnpjs,1)]);
         return view('home');
     }
 }

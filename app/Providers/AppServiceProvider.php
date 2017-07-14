@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Code\Validator\Cnpj;
 use Code\Validator\Cpf;
 use Faker\Factory;
 use Faker\Generator;
@@ -16,8 +17,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Validator::extend('cpf', function ($attribute, $value, $parameters, $validador){
-            return (new Cpf())->isValid($value);
+        \Validator::extend('documento', function ($attribute, $value, $parameters, $validator) {
+            if($parameters[0] == 'cpf'){
+                $documentValidator = new Cpf();
+            }else{
+                $documentValidator = new Cnpj();
+            }
+            return $documentValidator->isValid($value);
         });
     }
 
@@ -30,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->environment('local')) { // consider turning this into a method like isDevEnvironment() if you need more logic
             array_map([$this->app, 'register'], config('app.devProviders'));
+
             $this->app->singleton(Generator::class, function () {
                 return Factory::create(env('FAKER_LANGUAGE'));
             });
