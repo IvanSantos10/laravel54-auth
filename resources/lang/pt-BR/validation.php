@@ -38,6 +38,7 @@ return [
     'digits_between'       => 'O campo :attribute deve conter entre :min a :max dígitos.',
     'dimensions'           => 'O valor informado para o campo :attribute não é uma dimensão de imagem válida.',
     'distinct'             => 'O campo :attribute contém um valor duplicado.',
+    'documento'            => 'CPF/CNPJ inválido',
     'email'                => 'O campo :attribute não contém um endereço de email válido.',
     'exists'               => 'O valor selecionado para o campo :attribute é inválido.',
     'file'                 => 'O campo :attribute deve conter um arquivo.',
